@@ -1,4 +1,4 @@
-import { Navigate, RouterProvider, createHashRouter } from 'react-router-dom';
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
 import Layout from './Components/Layout/Layout.jsx';
 import Products from './Components/Products/Products.jsx';
@@ -45,7 +45,7 @@ console.log("user",userData);
   }
 
 
-  let routes = createHashRouter([{
+  let routes = createBrowserRouter([{
     path: '', element: <Layout userData={userData} logOut={logOut} />, children: [
       { index: true, element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Home /> </ProtectedRoute> },
       { path: 'products', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Products /> </ProtectedRoute> },

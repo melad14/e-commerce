@@ -1,20 +1,27 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 
-import {  useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { cartContext } from '../Context/CartContext';
 import Slider from 'react-slick';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Loading from '../Loading/Loding.jsx';
+import { toast } from 'react-toastify';
 
 
+export default function ProDetails({userData}) {
 
-export default function ProDetails() {
-
+let navigate=useNavigate()
   const  {addProductToCart,removeCartItem } = useContext(cartContext);
 
   async function addToCart(id){
-    await addProductToCart(id)
+    if(userData){
+   await addProductToCart(id)
+    }else{
+      navigate('/login')
+
+    }
+  
   };
 
   async function removeFromCart(id){
@@ -39,10 +46,9 @@ export default function ProDetails() {
     try {
       const { data } = await axios.get(`https://route-ecommerce.onrender.com/api/v1/products/${id}`);
       setProductDetails(data.data);
-      console.log(data.data); 
       
     } catch (error) {
-      console.log('Error : ', error);
+      toast.error(error,{duration:1000,className:"bg-black text-white"});
     }
   };
 

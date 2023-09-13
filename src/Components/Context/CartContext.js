@@ -1,11 +1,9 @@
 import axios from "axios";
 import React, { createContext, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import $ from 'jquery';
+import $  from 'jquery';
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
 import { baseUrl } from "../utils/baseUrl.jsx";
-
 
 export const cartContext = createContext();
 
@@ -22,15 +20,16 @@ export default function CartContext({ children }) {
 
 
   async function addProductToCart(proId) {
-    try {
-        const { data } = await axios.post(`${baseUrl}/cart`,{
-            'productId': proId,
-          },
-          {
-            headers: { 'token': localStorage.getItem("token"),
-            },
-          }
-        );
+
+
+  const {data}=  await axios.post(`${baseUrl}/cart`,{
+           'productId': proId,
+         },
+         {
+           headers: { 'token': localStorage.getItem("token"),
+           },
+         }
+       );
         if(data.status ==='success'){
           setNumOfCartItems(data.numOfCartItems);
           setTotalCartPrice(data.data.totalCartPrice);
@@ -39,15 +38,17 @@ export default function CartContext({ children }) {
           toast.success(data.message,{duration:1000,className:" text-success"});
           $('#addBtn').fadeOut(500);
           $('#delBtn').fadeIn(500);
-          return true;
         }else{
-          toast.error(data.message,{duration:1000,className:"bg-black text-white"});
-          return false;
+
+          toast.error(data.response.data.message,{duration:2000,className:"bg-black text-white"});
         }
-      } catch (error) {
-        console.log("Error : ", error);
-      }
-    };
+
+
+       
+       }
+ 
+
+  
 
     async function getCartProducts(){
       try {
@@ -64,7 +65,7 @@ export default function CartContext({ children }) {
     } catch (error) {
       if(error.response.status === 404){
         toast.error("No Cart exist for this User",{duration:2000,className:"text-danger px-4 fw-bolder"});
-        <Navigate to={'/home'}/>
+       
       }}}
     
 
@@ -84,13 +85,10 @@ export default function CartContext({ children }) {
           },});
         $('#delBtn').fadeOut(500);
         $('#addBtn').fadeIn(500);
-        return true;
-      }else{
-        toast.error(data.message,{duration:3000,className:"bg-black text-white"});
-        return false;
       }
       } catch (error) {
-        console.log('Error : ',error);
+        toast.error(error.data.message,{duration:3000,className:"bg-black text-white"});
+        
       }
     }
 
@@ -109,7 +107,7 @@ export default function CartContext({ children }) {
         setCartProducts(data.data.products);
         getCartProducts();
       }} catch (error) {
-        console.log('Error : ',error);
+        toast.error(error,{duration:1000,className:"bg-black text-white"});
       }
     }
 
@@ -124,7 +122,7 @@ export default function CartContext({ children }) {
         }
         return true;
       } catch (error) {
-        console.log('Error : ', error);
+        toast.error(error,{duration:1000,className:"bg-black text-white"});
       }
     }
 
@@ -146,7 +144,7 @@ export default function CartContext({ children }) {
         return false;
       }
       } catch (error) {
-        console.log('Error : ', error);
+        toast.error(error,{duration:1000,className:"bg-black text-white"});
       }};
 
       async function removeWishlist(id){
@@ -164,24 +162,27 @@ export default function CartContext({ children }) {
             },});
           $('#delWishlist').fadeOut(100);
           $('#addWishlist').fadeIn(100);
-          console.log(data);
           return true;
         }else{
           toast.error(data.message,{duration:3000,className:"bg-black text-white"});
           return false;
         }
         } catch (error) {
-          console.log('Error : ',error);
+          toast.error(error,{duration:1000,className:"bg-black text-white"});
         }
       }
-
-      useEffect(function(){
-        getWishlist();
-      },[])
+      useEffect(() => {
+        if (localStorage.getItem('token') !== null) {
       
-      useEffect(function(){
-        getCartProducts();
-      },[])
+          getWishlist();
+          getCartProducts();
+
+      
+        }
+      
+      }, [])
+
+
       
   return (
     <cartContext.Provider value={{ addProductToCart,numOfCartItems,totalCartPrice,cartProducts,

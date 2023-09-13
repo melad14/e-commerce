@@ -7,6 +7,6 @@ export const removeFromWishlist = async (productId) => {
       await axios.delete(`https://route-ecommerce.onrender.com/api/v1/wishlist/${productId}`, { headers:  {token} } );
      notify('removed', 'success')
     } catch (error) {
-      console.error('Error removing from wishlist:', error);
+      toast.error(error,{duration:1000,className:"bg-black text-white"});
     }
   };

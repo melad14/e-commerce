@@ -10,7 +10,7 @@ export const addToWishlist = async (productId) => {
     await axios.post(endpoint, { productId }, { headers:  {token} });
      notify('added', 'success')
   } catch (error) {
-    console.error('Error adding to wishlist:', error);
+    toast.error(error,{duration:1000,className:"bg-black text-white"});
   }
 };
 

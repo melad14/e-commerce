@@ -4,10 +4,9 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { baseUrl } from '../utils/baseUrl.jsx';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast } from "react-hot-toast";
 
 export default function Register() {
-    const notify = (msg, type) => toast[type](msg);
     const [loading, setLoading] = useState(false)
 
     let navigate = useNavigate()
@@ -29,22 +28,20 @@ export default function Register() {
             password: Yup.string().matches(/^[A-Z][a-z0-9]{3,8}$/, 'password not match validation').required(),
             rePassword: Yup.string().oneOf([Yup.ref('password')], "not match").required(),
         }),
-        onSubmit: (values) => {
+        onSubmit: async (values) => {
             setLoading(true)
-            axios.post(`${baseUrl}/auth/signup`, values).then((obj) => {
-                if (obj.data.message == 'success') {
-                    notify('success', 'success')
+            await axios.post(`${baseUrl}/auth/signup`, values).then((obj) => {
+                if (obj.data.message === 'success') {
+                    toast.success(obj.data.message, { duration: 2000, className: " text-success" });
                     navigate('/login')
                     setLoading(false)
                 }
-            })
-                .catch((error) => {
-                    if (error) {
-                        notify(error.response.data.errors.msg, 'error')
-                        setLoading(false)
+            }).catch((error) => {   
+                    toast.error(error.response.data.message, { duration: 2000, className: "bg-black text-white" });
+                    setLoading(false)
 
-                    }
-                })
+                
+            })
         }
     })
 

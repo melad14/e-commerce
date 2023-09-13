@@ -35,7 +35,6 @@ function App() {
       saveUserData();
 
     }
-console.log("user",userData);
   }, [])
 
   function logOut() {
@@ -52,7 +51,7 @@ console.log("user",userData);
       { path: 'category', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Categories /> </ProtectedRoute> },
       { path: 'payment', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Payment /> </ProtectedRoute> },
       { path: 'brands', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Brands /> </ProtectedRoute> },
-      { path: 'prodetails/:id', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><ProDetails /> </ProtectedRoute> },
+      { path: 'prodetails/:id', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><ProDetails  userData={userData}/>   </ProtectedRoute> },
       { path: 'wishlist', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><WishList /> </ProtectedRoute> },
       { path: 'cart', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Cart /> </ProtectedRoute> },
       { path: 'allorders', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><AllOrders userData={userData}/> </ProtectedRoute> },

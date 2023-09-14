@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import "./cat.css"
 import { baseUrl } from '../utils/baseUrl.jsx'
 import Slider from "react-slick";
 export default function CategorySlider() {
@@ -19,12 +20,12 @@ getAllCategories()
   }, [])
   
   return <> 
-  <div className="container my-5">
+  <div className="container my-5 slidd">
     <div>
          <Slider {...settings} className='slid'   >
           {category.map((item,index)=>{
-            return  <div key={index} className='p-2' >
-              <img src={item.image} alt="" className='w-100'height={200}/>
+            return  <div key={index} className='p-2 m-2 text-center ' >
+              <img src={item.image} alt="" className='w-100 mb-1'height={200}/>
               <h6>{item.name}</h6>
               </div>  
           })}

@@ -41,7 +41,7 @@ export default function AllOrders({userData}) {
                 <div className="row">
           {order.cartItems.map(function(item,index){ return <div key={index} className="col-md-6">
                     <div className="item">
-                      <img src={item.product.imageCover} className='w-100 rounded-5 p-2' style={{'height':'200px'}} alt="" />
+                      <img src={item.product.imageCover} className='w-100 rounded-5 p-2' alt="" />
                       
                       <div className="p-2 rounded-5">
                       <h5 className='text-success'>{item.product.brand.name}</h5>

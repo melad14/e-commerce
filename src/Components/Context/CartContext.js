@@ -63,10 +63,10 @@ export default function CartContext({ children }) {
           localStorage.setItem("cartId",data.data._id)
         }
     } catch (error) {
-      if(error.response.status === 404){
+  
         toast.error("No Cart exist for this User",{duration:2000,className:"text-danger px-4 fw-bolder"});
        
-      }}}
+      }}
     
 
     async function removeCartItem(id){

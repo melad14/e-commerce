@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { cartContext } from '../Context/CartContext.js'
-
+import './Cart.css'
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
@@ -39,14 +39,14 @@ export default function Cart() {
   </Helmet>
 
     
-    <h3 className='mt-5 pt-5 text-success fw-bolder text-center text-muted'>Welcome User to your Cart <i class="fa-solid fa-cart-arrow-down text-success"></i></h3>
+    <h3 className='mt-5 pt-5 text-success fw-bolder text-center text-muted'> User Cart </h3>
 
 
 
   {cartProducts? <div className="container mb-3 ">
     <div className='d-flex justify-content-between align-items-center'>
-    <img src={require('../../images/green_shoppictcart_1484336527-1.png')} className='w-25' style={{'height':'400px'}} alt="" />
-    <div className='orderPayment text-muted'>
+    <img src={require('../../images/green_shoppictcart_1484336527-1.png')} className='w-25 ' alt="" />
+    <div className='orderPayment text-muted '>
       <h2 className='text-center py-3 text-black'>Orders</h2>
       <h5 className='pt-3 pb-2 px-3'>Products  <span className='text-success'>{ numOfCartItems } items</span></h5>
       <h5 className='px-3'>Total Price <span className='text-success'>{ totalCartPrice } EGP</span></h5>
@@ -54,15 +54,17 @@ export default function Cart() {
       <button className='btn btn-outline-success fw-bolder my-3 w-75 mx-4'>CheckOut</button>
       </Link>
     </div>
+   
     </div>
+     <hr />
     <div className="row gx-5">
       { cartProducts.map(function(cart,idx){return <div key={idx}  className='py-3 border-bottom border-1 border-dark d-flex align-items-center justify-content-between'> <div key={idx} className="col-md-3 rounded-5  ">
-      <img src={cart.product.imageCover} className='w-50 rounded-5' style={{'height':'200px'}} alt={cart.title} />
+      <img src={cart.product.imageCover} className='w-50 rounded-5'  alt={cart.title} />
       </div>
       <div className="col-md-4 text-start ">
       <div className="product rounded-5 ">
-        <h6 className='text-success'>{cart.product.title?.slice(0,cart.product.title.indexOf(' ', 10 ))}</h6>
-        <h6 className='text-muted' >Price : <span className="text-success"> {cart.price} EGP</span></h6>
+        <h6 className='text-success lon '>{cart.product.title?.slice(0,cart.product.title.indexOf(' ', 10 ))}</h6>
+        <h6 className='text-muted lon' >Price : <span className="text-success"> {cart.price} EGP</span></h6>
         
         <button onClick={function(){removeItemFromCart(cart.product.id)}} className='btn btn-outline-danger my-2'>Remove</button>
 

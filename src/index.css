@@ -108,10 +108,10 @@ a {
   opacity: 1;
   transform: translateY(0);
 }
-
+/* 
 .cart-customize:hover {
   box-shadow: 15px 15px 15px rgb(93, 104, 107) !important;
-}
+} */
 
 .brand-item:hover {
   box-shadow: 15px 15px 15px lightblue !important;
@@ -186,4 +186,22 @@ a {
 }
 
 
+.iconaa{
+  position: absolute;
+  bottom: 90px;
+  right: 0;
+}
 
+
+img{
+  transition: all .6s;
+  
+}
+.sora:hover img{
+  transform: scale(1.2);
+}
+.sora{
+  border-radius: 10px;
+
+  overflow: hidden;
+}

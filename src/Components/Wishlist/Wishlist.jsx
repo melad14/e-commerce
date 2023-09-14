@@ -17,7 +17,7 @@ export default function Wishlist() {
     <title>Wishlist</title>
   </Helmet>
 
-  <h3 className='mt-5 pt-5 text-success fw-bolder text-center text-muted'>Welcome User to your Wishlist <i class="fa-solid fa-heart text-danger"></i> </h3>
+  <h3 className='mt-5 pt-5 text-success fw-bolder text-center text-muted'> User Wishlist  </h3>
   
   
     { wishlistProducts ? <div className="container py-3">

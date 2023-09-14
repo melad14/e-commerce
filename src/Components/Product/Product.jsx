@@ -28,11 +28,11 @@ export default function Product(props) {
 
     <div className="row g-5 my-1 px-5">
       {allProducts.map(function (pro, idx) {
-        return <div key={idx} className="col-md-3">
+        return <div key={idx} className="col-lg-3 col-md-4 col-sm-6">
 
           <div className="cart-customize item text-white h-100 rounded-5 position-relative shadow " >
-            <i id={`addWishlist${idx}`} onClick={function () { addWishlist(pro.id, idx) }} className=" fa-regular fa-heart text-dark fs-4 position-absolute top-0 end-0 m-3"></i>
-            <i id={`delWishlist${idx}`} onClick={function () { removeFromWishlist(pro.id, idx) }} style={{ 'display': 'none' }} className="fa-solid fa-heart fs-4 position-absolute top-0 end-0 m-3 text-danger" ></i>
+            <i id={`addWishlist${idx}`} onClick={function () { addWishlist(pro.id, idx) }} className=" fa-regular fa-heart text-dark fs-4 iconaa m-3"></i>
+            <i id={`delWishlist${idx}`} onClick={function () { removeFromWishlist(pro.id, idx) }} style={{ 'display': 'none' }} className="fa-solid fa-heart fs-4 iconaa m-3 text-danger" ></i>
             <div className="sora">
 
               <img src={pro.imageCover} className="w-100 rounded-5" alt={pro.title} style={{ 'height': '300px' }} />

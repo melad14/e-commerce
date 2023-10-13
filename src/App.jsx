@@ -1,69 +1,54 @@
-import { Navigate, RouterProvider, createHashRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Layout from './Components/Layout/Layout.jsx';
 import Products from './Components/Products/Products.jsx';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
-import jwtDecode from 'jwt-decode';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute.jsx';
 import InverseProtectedRoute from './Components/InverseProtectedRouter/InverseProtectedRoute';
 import WishList from './Components/Wishlist/Wishlist.jsx';
 import Categories from './Components/Categories/Categories.jsx';
 import Brands from './Components/Brands/Brands.jsx';
 import Home from './Components/Home/Home.jsx';
-import CartContext from './Components/Context/CartContext.js';
-import { Toaster } from 'react-hot-toast';
 import Cart from './Components/Cart/Cart.jsx';
 import ProDetails from './Components/ProDetails/ProDetails';
 import Payment from './Components/Payment/Payment.jsx';
 import AllOrders from './Components/AllOrders/AllOrders.jsx';
+import { AuthContext } from './Components/Context/AuthContext.jsx';
 
 function App() {
 
-  const [userData, setUserData] = useState('')
-
-  function saveUserData() {
-    let encodedToken = localStorage.getItem("token")
-    let decodedToken = jwtDecode(encodedToken);
-    setUserData(decodedToken)
-  }
+  let { saveUserData } = useContext(AuthContext)
 
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
-
       saveUserData();
-
     }
   }, [])
 
-  function logOut() {
-    localStorage.removeItem('token')
-    setUserData(null)
-    return <Navigate to='/login' />
-  }
 
 
-  let routes = createHashRouter([{
-    path: '', element: <Layout userData={userData} logOut={logOut} />, children: [
-      { index: true, element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Home /> </ProtectedRoute> },
-      { path: 'products', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Products /> </ProtectedRoute> },
-      { path: 'category', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Categories /> </ProtectedRoute> },
-      { path: 'payment', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Payment /> </ProtectedRoute> },
-      { path: 'brands', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Brands /> </ProtectedRoute> },
-      { path: 'prodetails/:id', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><ProDetails  userData={userData}/>   </ProtectedRoute> },
-      { path: 'wishlist', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><WishList /> </ProtectedRoute> },
-      { path: 'cart', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><Cart /> </ProtectedRoute> },
-      { path: 'allorders', element: <ProtectedRoute saveUserData={saveUserData} userData={userData} ><AllOrders userData={userData}/> </ProtectedRoute> },
-      { path: 'register', element: <InverseProtectedRoute><Register /> </InverseProtectedRoute> },
-      { path: 'login', element: <InverseProtectedRoute>< Login saveUserData={saveUserData} /> </InverseProtectedRoute> },
-    ]
-  }])
+
   return <>
-<CartContext>
-    <Toaster />
-    <RouterProvider router={routes} />
-    </CartContext>
+<BrowserRouter>
+<Routes>
+  <Route path='' element={<Layout/>}>
+  <Route index element={<ProtectedRoute><Home /></ProtectedRoute>} />
+  <Route path='products' element={<ProtectedRoute><Products /></ProtectedRoute>} />
+  <Route path='category' element={<ProtectedRoute><Categories /></ProtectedRoute>} />
+  <Route path='payment' element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+  <Route path='brands' element={<ProtectedRoute><Brands /></ProtectedRoute>} />
+  <Route path='prodetails/:id' element={<ProtectedRoute><ProDetails /></ProtectedRoute>} />
+  <Route path='wishlist' element={<ProtectedRoute><WishList /></ProtectedRoute>} />
+  <Route path='cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+  <Route path='allorders' element={<ProtectedRoute><AllOrders /></ProtectedRoute>} />
+  <Route path='register' element={<InverseProtectedRoute><Register /></InverseProtectedRoute>} />
+  <Route path='login' element={<InverseProtectedRoute><Login /></InverseProtectedRoute>} />
+
+  </Route>
+</Routes>
+</BrowserRouter>
   </>
 }
 

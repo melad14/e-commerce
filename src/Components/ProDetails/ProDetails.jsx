@@ -1,16 +1,15 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
-
 import {  useNavigate, useParams } from 'react-router-dom';
 import { cartContext } from '../Context/CartContext';
 import Slider from 'react-slick';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import Loading from '../Loading/Loding.jsx';
 import { toast } from 'react-toastify';
+import { AuthContext } from './../Context/AuthContext';
 
-
-export default function ProDetails({userData}) {
-
+export default function ProDetails() {
+let {userData}=useContext(AuthContext)
 let navigate=useNavigate()
   const  {addProductToCart,removeCartItem } = useContext(cartContext);
 

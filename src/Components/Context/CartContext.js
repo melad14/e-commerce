@@ -42,10 +42,7 @@ export default function CartContext({ children }) {
 
           toast.error(data.response.data.message,{duration:2000,className:"bg-black text-white"});
         }
-
-
-       
-       }
+     }
  
 
   

@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { baseUrl } from '../utils/baseUrl.jsx';
 import { useNavigate } from 'react-router-dom';
 import { toast } from "react-hot-toast";
+import { AuthContext } from '../Context/AuthContext.jsx';
 
-export default function Login({ saveUserData }) {
+export default function Login() {
+    let {saveUserData }=useContext(AuthContext)
+
     const [loading, setLoading] = useState(false)
 
 

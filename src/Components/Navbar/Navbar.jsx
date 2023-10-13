@@ -2,7 +2,9 @@ import React, { useContext } from 'react'
 import logo from "../../images/freshcart-logo.svg"
 import { Link } from 'react-router-dom'
 import { cartContext } from '../Context/CartContext.js';
-export default function Navbar({ userData, logOut }) {
+import { AuthContext } from '../Context/AuthContext.jsx';
+export default function Navbar() {
+  let {userData,logOut }=useContext(AuthContext)
 
   const {numOfCartItems} = useContext(cartContext);
 

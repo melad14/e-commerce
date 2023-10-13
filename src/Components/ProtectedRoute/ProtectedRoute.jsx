@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Login from './../Login/Login';
+import { AuthContext } from '../Context/AuthContext.jsx';
 
-export default function ProtectedRoute({userData,children,saveUserData }) {
-  
+export default function ProtectedRoute({children }) {
+    let {userData }=useContext(AuthContext)
+
     if(userData===null){
 
-        return <Login saveUserData={saveUserData}/>
+        return <Login />
     }
     else{
         return children;

@@ -10,11 +10,20 @@ import './index.css';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import CartContext from './Components/Context/CartContext.js';
+import { Toaster } from 'react-hot-toast';
+import AuthContextProvider from './Components/Context/AuthContext.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
+<AuthContextProvider>
+<CartContext>
+<Toaster />
 <App />
+</CartContext>
+</AuthContextProvider>
+
+
 
 );
 

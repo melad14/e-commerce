@@ -1,13 +1,16 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 //import Loading from '../Loading/Loding.jsx';
 import { toast } from 'react-hot-toast';
+import { AuthContext } from '../Context/AuthContext.jsx';
 // import { baseUrl } from './../utils/baseUrl';
 // import { data } from 'jquery';
 
 
-export default function AllOrders({userData}) {
+export default function AllOrders() {
+  let {userData}=useContext(AuthContext)
+
   const [allOrders, setAllOrders] = useState();
 
   async function getAllOrders(){

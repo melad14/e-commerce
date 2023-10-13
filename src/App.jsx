@@ -35,6 +35,7 @@ function App() {
 <Routes>
   <Route path='' element={<Layout/>}>
   <Route index element={<ProtectedRoute><Home /></ProtectedRoute>} />
+  <Route path='e-commerce' element={<ProtectedRoute><Home /></ProtectedRoute>} />
   <Route path='products' element={<ProtectedRoute><Products /></ProtectedRoute>} />
   <Route path='category' element={<ProtectedRoute><Categories /></ProtectedRoute>} />
   <Route path='payment' element={<ProtectedRoute><Payment /></ProtectedRoute>} />

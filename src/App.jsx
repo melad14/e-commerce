@@ -28,28 +28,25 @@ function App() {
   }, [])
 
 
-
-
   return <>
-<BrowserRouter>
-<Routes>
-  <Route path='' element={<Layout/>}>
-  <Route index element={<ProtectedRoute><Home /></ProtectedRoute>} />
-  <Route path='e-commerce' element={<ProtectedRoute><Home /></ProtectedRoute>} />
-  <Route path='products' element={<ProtectedRoute><Products /></ProtectedRoute>} />
-  <Route path='category' element={<ProtectedRoute><Categories /></ProtectedRoute>} />
-  <Route path='payment' element={<ProtectedRoute><Payment /></ProtectedRoute>} />
-  <Route path='brands' element={<ProtectedRoute><Brands /></ProtectedRoute>} />
-  <Route path='prodetails/:id' element={<ProtectedRoute><ProDetails /></ProtectedRoute>} />
-  <Route path='wishlist' element={<ProtectedRoute><WishList /></ProtectedRoute>} />
-  <Route path='cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-  <Route path='allorders' element={<ProtectedRoute><AllOrders /></ProtectedRoute>} />
-  <Route path='register' element={<InverseProtectedRoute><Register /></InverseProtectedRoute>} />
-  <Route path='login' element={<InverseProtectedRoute><Login /></InverseProtectedRoute>} />
-
-  </Route>
-</Routes>
-</BrowserRouter>
+    <BrowserRouter>
+      <Routes>
+        <Route path='' element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path='e-commerce' element={<Home />} />
+          <Route path='products' element={<Products />} />
+          <Route path='category' element={<Categories />} />
+          <Route path='payment' element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+          <Route path='brands' element={<Brands />} />
+          <Route path='prodetails/:id' element={<ProDetails />} />
+          <Route path='wishlist' element={<ProtectedRoute><WishList /></ProtectedRoute>} />
+          <Route path='cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+          <Route path='allorders' element={<ProtectedRoute> <AllOrders /> </ProtectedRoute>} />
+          <Route path='register' element={<InverseProtectedRoute><Register /></InverseProtectedRoute>} />
+          <Route path='login' element={<InverseProtectedRoute><Login /></InverseProtectedRoute>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   </>
 }
 

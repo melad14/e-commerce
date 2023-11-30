@@ -6,9 +6,8 @@ export default function ProtectedRoute({children }) {
     let {userData }=useContext(AuthContext)
 
     if(userData===null){
-
         return <Login />
-    }
+ }
     else{
         return children;
     }

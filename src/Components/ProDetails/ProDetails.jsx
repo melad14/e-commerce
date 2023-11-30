@@ -9,22 +9,33 @@ import { toast } from 'react-toastify';
 import { AuthContext } from './../Context/AuthContext';
 
 export default function ProDetails() {
+
 let {userData}=useContext(AuthContext)
 let navigate=useNavigate()
+const { id } = useParams();
   const  {addProductToCart,removeCartItem } = useContext(cartContext);
+  const [show, setShow] = useState(localStorage.getItem(`show-${id}`) || '');
+  const [showw, setShoww] = useState(localStorage.getItem(`showw-${id}`) || '');
+  const [productDetails, setProductDetails] = useState(null);
 
   async function addToCart(id){
     if(userData){
    await addProductToCart(id)
+   localStorage.setItem(`show-${id}`, 'd-block');
+   localStorage.setItem(`showw-${id}`, 'd-none');
+   setShow('d-block');
+   setShoww('d-none');
     }else{
       navigate('/login')
-
     }
-  
   };
 
   async function removeFromCart(id){
     await removeCartItem(id)
+    localStorage.setItem(`show-${id}`, 'd-none');
+    localStorage.setItem(`showw-${id}`, 'd-block');
+    setShow('d-none');
+    setShoww('d-block');
     };
 
 
@@ -36,9 +47,6 @@ let navigate=useNavigate()
     slidesToScroll: 1,
   };  
 
-  const { id } = useParams();
-
-  const [productDetails, setProductDetails] = useState(null);
 
   async function getProductDetails(){
     
@@ -72,8 +80,8 @@ let navigate=useNavigate()
         <p>{productDetails.description}</p>
         <h6 className='text-muted py-1'>Price : { productDetails.priceAfterDiscount ?  <> <span className='text-decoration-line-through text-danger'>{productDetails.price} </span> <span className=' fw-bold ps-2 text-success'>{ productDetails.priceAfterDiscount } EGP</span> </> : <span>{productDetails.price} EGP</span> }</h6>
         <h6 className='py-2 text-muted'>Quantity : {productDetails.quantity}</h6>
-        <button id='addBtn' onClick={function(){addToCart(productDetails.id)}} className='btnAdd btn btn-success w-100 mt-5'>Add Product to Cart +</button>
-        <button id='delBtn' onClick={function(){removeFromCart(productDetails.id)}} style={{'display':'none'}} className="btnRemove w-100 mt-5 btn btn-danger">Remove Product From Cart -</button>
+        <button id='addBtn' onClick={function(){addToCart(productDetails.id)}} className={`btnAdd btn btn-success w-100 mt-5 ${showw}`}>Add Product to Cart +</button>
+        <button id='delBtn' onClick={function(){removeFromCart(productDetails.id)}}  className={`btnRemove w-100 mt-5 btn btn-danger ${show?show:'d-none'}`}>Remove Product From Cart -</button>
       </div>
     </div>
   </div> : <Loading/> };

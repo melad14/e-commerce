@@ -10,6 +10,8 @@ export default function Wishlist() {
 
   async function removeFromWishlish(id){
     await removeWishlist(id);
+    localStorage.setItem(`lon-${id}`, 'd-none');
+    localStorage.setItem(`lonn-${id}`, 'd-block');
   }
 
   return <HelmetProvider>
@@ -25,7 +27,7 @@ export default function Wishlist() {
           { wishlistProducts.map(function(pro,idx){
             return  <div key={idx} className="col-md-3">
             <div className="cart-customize item text-white h-100 rounded-5 position-relative shadow" >
-            <i id={`delWishlist${idx}`} onClick={function(){removeFromWishlish(pro._id,idx)}} className="fa-solid fa-heart fs-4 position-absolute top-0 end-0 m-3 text-danger" ></i>
+            <i  onClick={function(){removeFromWishlish(pro._id)}} className="fa-solid fa-heart fs-4 position-absolute top-0 end-0 m-3 text-danger" ></i>
               <img src={pro.imageCover} className="w-100 rounded-5" alt={pro.title} style={{'height':'350px'}} />
               <h6 className='px-3 text-success text-start pt-3'>{pro.title?.slice( 0,pro.title.indexOf(' ', 10 ))}</h6>
               <h6 className='px-3 text-black'>{pro.category?.name}</h6>

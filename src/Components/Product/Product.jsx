@@ -5,7 +5,6 @@ import { cartContext } from '../Context/CartContext.js';
 export default function Product(props) {
   const { allProducts } = props;
   const { addToWishlist, removeWishlist } = useContext(cartContext);
-
   const [wishlistStates, setWishlistStates] = useState({});
 
   useEffect(() => {
